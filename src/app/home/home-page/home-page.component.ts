@@ -1,19 +1,25 @@
 import {Component, OnInit} from '@angular/core';
 import {ResultDialogComponent} from '../result-dialog/result-dialog.component';
 import {
-  bug,
-  dark, dragon,
-  electric, fairy,
-  fighting, fire,
-  flying,
-  ghost,
-  grass,
-  ground, ice,
+  insecte,
+  tenebres,
+  electrique,
+  fee,
+  combat,
+  feu,
+  vol,
+  spectre,
+  plante,
+  sol,
+  glace,
   normal,
-  poison, pokeType,
+  poison,
+  pokeType,
   psy,
-  rock,
-  steel, water
+  roche,
+  acier,
+  eau,
+  dragon
 } from '../../shared/typeEffectiveness';
 import {MatBottomSheet} from '@angular/material/bottom-sheet';
 
@@ -29,23 +35,23 @@ export class HomePageComponent implements OnInit {
   pokeType = pokeType;
   table = {
     normal,
-    fighting,
-    flying,
+    combat,
+    vol,
     poison,
-    ground,
-    rock,
-    bug,
-    ghost,
-    steel,
-    fire,
-    water,
-    grass,
-    electric,
+    sol,
+    roche,
+    insecte,
+    spectre,
+    acier,
+    feu,
+    eau,
+    plante,
+    electrique,
     psy,
-    ice,
+    glace,
     dragon,
-    dark,
-    fairy,
+    tenebres,
+    fee,
   };
   selection = {
     type1: [],
@@ -108,7 +114,8 @@ export class HomePageComponent implements OnInit {
   }
 
   openBottomSheet(): void {
-    this.bottomSheet.open(ResultDialogComponent, {data:
+    this.bottomSheet.open(ResultDialogComponent, {
+      data:
         [this.displayBestType, this.secondTypeOnlyError, this.noTypeSelectionError, this.doubleType]
     });
   }

@@ -10,11 +10,11 @@ import {MAT_BOTTOM_SHEET_DATA} from '@angular/material/bottom-sheet';
 export class ResultDialogComponent implements OnInit{
   dataSource = this.data;
 
+  // tslint:disable-next-line:variable-name
   constructor(private _bottomSheetRef: MatBottomSheetRef<ResultDialogComponent>,
               @Inject(MAT_BOTTOM_SHEET_DATA) public data: any) {
   }
 
   ngOnInit(): void {
-    console.log(this.dataSource);
   }
 }

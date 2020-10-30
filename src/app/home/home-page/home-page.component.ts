@@ -70,6 +70,7 @@ export class HomePageComponent implements OnInit {
   addType1(type) {
     this.secondTypeOnlyError = '';
     this.doubleType = '';
+    this.noTypeSelectionError = '';
     this.displayBestType = [];
     this.selection.type1 = type.value;
   }
@@ -102,7 +103,6 @@ export class HomePageComponent implements OnInit {
       }
     }
     this.bestType.sort((a, b) => b[1] - a[1]);
-    console.log(this.bestType);
     if (this.bestType[0][1]) {
       for (let i = 0; i < 3; i++) {
         this.displayBestType.push(this.bestType[i]);

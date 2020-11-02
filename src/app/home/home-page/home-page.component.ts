@@ -22,6 +22,11 @@ import {
   dragon
 } from '../../shared/typeEffectiveness';
 import {MatBottomSheet} from '@angular/material/bottom-sheet';
+import {Observable} from "rxjs";
+import {selectTypes} from "../store/types-display.selectors";
+import {Store} from "@ngrx/store";
+import {State} from "../store/types-display.reducer";
+import {loadTypes} from "../store/types-display.actions";
 
 @Component({
   selector: 'app-home-page',
@@ -33,26 +38,7 @@ export class HomePageComponent implements OnInit {
   noTypeSelectionError = '';
   doubleType = '';
   pokeType = pokeType;
-  table = {
-    normal,
-    combat,
-    vol,
-    poison,
-    sol,
-    roche,
-    insecte,
-    spectre,
-    acier,
-    feu,
-    eau,
-    plante,
-    electrique,
-    psy,
-    glace,
-    dragon,
-    tenebres,
-    fee,
-  };
+  types$: Observable<{name: string; url: string}[]> = this.store.select(selectTypes);
   selection = {
     type1: [],
     type2: []
@@ -61,10 +47,11 @@ export class HomePageComponent implements OnInit {
   displayBestType = [];
 
 
-  constructor(private bottomSheet: MatBottomSheet) {
+  constructor(private bottomSheet: MatBottomSheet, private store: Store<State>) {
   }
 
   ngOnInit(): void {
+    this.store.dispatch(loadTypes());
   }
 
   addType1(type) {

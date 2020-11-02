@@ -8,7 +8,11 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatCardModule} from '@angular/material/card';
 import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
-import { ResultDialogComponent } from './result-dialog/result-dialog.component';
+import {ResultDialogComponent} from './result-dialog/result-dialog.component';
+import {EffectsModule} from '@ngrx/effects';
+import {TypesDisplayEffects} from 'src/app/home/store/types-display.effects';
+import {StoreModule} from '@ngrx/store';
+import * as fromTypesDisplay from 'src/app/home/store/types-display.reducer';
 
 
 @NgModule({
@@ -21,7 +25,9 @@ import { ResultDialogComponent } from './result-dialog/result-dialog.component';
     MatDividerModule,
     MatGridListModule,
     MatCardModule,
-    MatBottomSheetModule
+    MatBottomSheetModule,
+    EffectsModule.forFeature([TypesDisplayEffects]),
+    StoreModule.forFeature(fromTypesDisplay.typesDisplayFeatureKey, fromTypesDisplay.reducer)
   ]
 })
 export class HomeModule {

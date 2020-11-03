@@ -12,7 +12,7 @@ export const initialState: State = {
 const TypesDisplayReducer = createReducer(
   initialState,
   on(TypesDisplayActions.loadTypesSuccess, ((state, action) => ({
-      ...state, types: action.types.filter((type) => type.name !== 'unknown')
+      ...state, types: action.types.filter((type) => type.name !== 'unknown' && type.name !== 'shadow')
     }))
   ));
 

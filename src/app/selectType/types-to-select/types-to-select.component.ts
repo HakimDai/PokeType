@@ -30,7 +30,9 @@ export class TypesToSelectComponent implements OnInit, OnDestroy {
       return this.typesService.selectTypes(type);
     }
     this.selectedTypes.forEach((selectedType) => {
-      if (selectedType === type) {typeToRemove = true}
+      if (selectedType === type) {
+        typeToRemove = true;
+      }
     });
     typeToRemove
       ? this.typesService.removeType(type)

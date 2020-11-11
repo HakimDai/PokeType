@@ -52,5 +52,10 @@
     "tslint-angular": "^3.0.3",
     "tslint-config-prettier": "^1.18.0",
     "typescript": "~3.9.7"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged && ng lint"
+    }
   }
 }

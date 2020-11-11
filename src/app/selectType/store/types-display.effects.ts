@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import {catchError, map, mergeMap, tap} from 'rxjs/operators';
-import { TypesService } from 'src/app/home/services/types.service';
+import { TypesService } from 'src/app/selectType/services/types.service';
 import { of } from 'rxjs';
-import * as fromTypesDisplayActions from 'src/app/home/store/types-display.actions';
+import * as fromTypesDisplayActions from 'src/app/selectType/store/types-display.actions';
 
 @Injectable()
 export class TypesDisplayEffects {

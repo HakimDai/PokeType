@@ -14,7 +14,7 @@ import {
   glace,
   normal,
   poison,
-  pokeType,
+  types,
   psy,
   roche,
   acier,
@@ -30,14 +30,14 @@ import {loadTypes} from "../store/types-display.actions";
 
 @Component({
   selector: 'app-home-page',
-  templateUrl: './home-page.component.html',
-  styleUrls: ['./home-page.component.scss']
+  templateUrl: './select-type-page.component.html',
+  styleUrls: ['./select-type-page.component.scss']
 })
-export class HomePageComponent implements OnInit {
+export class SelectTypePageComponent implements OnInit {
   secondTypeOnlyError = '';
   noTypeSelectionError = '';
   doubleType = '';
-  pokeType = pokeType;
+  pokeType = types;
   types$: Observable<{name: string; url: string}[]> = this.store.select(selectTypes);
   selection = {
     type1: [],

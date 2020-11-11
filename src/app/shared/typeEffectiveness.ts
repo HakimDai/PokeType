@@ -16,7 +16,7 @@ export const glace: number[] = [1, 2, 1, 1, 1, 2, 1, 1, 2, 2, 1, 1, 1, 1, .5, 1,
 export const dragon: number[] = [1, 1, 1, 1, 1, 1, 1, 1, 1, .5, .5, .5, .5, 1, 2, 2, 1, 2];
 export const tenebres: number[] = [1, 2, 1, 1, 1, 1, 2, .5, 1, 1, 1, 1, 1, 0, 1, 1, .5, 2];
 export const fee: number[] = [1, .5, 1, 2, 1, 1, .5, 1, 2, 1, 1, 1, 1, 1, 1, 0, .5, 1];
-export const pokeType: string[] = ['normal',
+export const types: string[] = ['normal',
   'combat',
   'vol',
   'poison',

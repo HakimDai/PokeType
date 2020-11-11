@@ -2,8 +2,10 @@ export interface TypeFetchResult {
   count: number;
   next: any;
   previous: any;
-  results: [{
-    name: string;
-    url: string;
-  }];
+  results: [
+    {
+      name: string;
+      url: string;
+    }
+  ];
 }

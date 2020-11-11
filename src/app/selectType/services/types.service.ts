@@ -4,15 +4,17 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { TypeFetchResult } from 'src/app/selectType/models/typeFetchResult';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TypesService {
   baseUrl = 'https://pokeapi.co/api/v2';
-  selectedTypes$: BehaviorSubject<Set<string>> = new BehaviorSubject<Set<string>>(new Set<string>());
+  selectedTypes$: BehaviorSubject<Set<string>> = new BehaviorSubject<
+    Set<string>
+  >(new Set<string>());
   errorMessage$: Subject<string> = new Subject<string>();
   selectedTypes: Set<string> = new Set<string>();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   fetchTypes(): Observable<TypeFetchResult> {
     return this.http.get<TypeFetchResult>(`${this.baseUrl}/type`);

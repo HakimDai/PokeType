@@ -8,9 +8,8 @@ describe('SelectedTypesComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SelectedTypesComponent ]
-    })
-    .compileComponents();
+      declarations: [SelectedTypesComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

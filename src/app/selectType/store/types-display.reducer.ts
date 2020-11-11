@@ -1,20 +1,23 @@
-import {Action, createReducer, on} from '@ngrx/store';
+import { Action, createReducer, on } from '@ngrx/store';
 import * as TypesDisplayActions from 'src/app/selectType/store/types-display.actions';
 
 export interface State {
-  types: [{name: string; url: string}];
+  types: [{ name: string; url: string }];
 }
 
 export const initialState: State = {
-  types: undefined
+  types: undefined,
 };
 
 const TypesDisplayReducer = createReducer(
   initialState,
-  on(TypesDisplayActions.loadTypesSuccess, ((state, action) => ({
-      ...state, types: action.types.filter((type) => type.name !== 'unknown' && type.name !== 'shadow')
-    }))
-  ));
+  on(TypesDisplayActions.loadTypesSuccess, (state, action) => ({
+    ...state,
+    types: action.types.filter(
+      (type) => type.name !== 'unknown' && type.name !== 'shadow'
+    ),
+  }))
+);
 
 export function reducer(state: State | undefined, action: Action) {
   return TypesDisplayReducer(state, action);

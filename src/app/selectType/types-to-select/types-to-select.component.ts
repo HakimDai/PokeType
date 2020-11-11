@@ -6,15 +6,14 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-types-to-select',
   templateUrl: './types-to-select.component.html',
-  styleUrls: [ './types-to-select.component.scss' ]
+  styleUrls: ['./types-to-select.component.scss'],
 })
 export class TypesToSelectComponent implements OnInit, OnDestroy {
   types: string[];
   selectedTypes: Set<string> = new Set<string>();
   selectedTypesSubscription: Subscription;
 
-  constructor(private typesService: TypesService) {
-  }
+  constructor(private typesService: TypesService) {}
 
   ngOnInit(): void {
     this.types = types;
@@ -26,24 +25,21 @@ export class TypesToSelectComponent implements OnInit, OnDestroy {
   }
 
   selectTypes(type) {
-
-
     let typeToRemove = false;
     if (this.selectedTypes.size === 0) {
       return this.typesService.selectTypes(type);
     }
-    this.selectedTypes.forEach(selectedType => {
+    this.selectedTypes.forEach((selectedType) => {
       typeToRemove = selectedType === type;
     });
-    !!typeToRemove ? this.typesService.removeType(type) : this.typesService.selectTypes(type);
+    !!typeToRemove
+      ? this.typesService.removeType(type)
+      : this.typesService.selectTypes(type);
   }
 
   subscribeToSelectedType() {
-    return this.typesService.selectedTypes$.subscribe(
-      selectedTypes => {
-        this.selectedTypes = selectedTypes;
-      }
-    );
+    return this.typesService.selectedTypes$.subscribe((selectedTypes) => {
+      this.selectedTypes = selectedTypes;
+    });
   }
-
 }

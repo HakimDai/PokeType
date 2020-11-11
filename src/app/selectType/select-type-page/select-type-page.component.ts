@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {ResultDialogComponent} from '../result-dialog/result-dialog.component';
+import { Component, OnInit } from '@angular/core';
+import { ResultDialogComponent } from '../result-dialog/result-dialog.component';
 import {
   insecte,
   tenebres,
@@ -19,36 +19,39 @@ import {
   roche,
   acier,
   eau,
-  dragon
+  dragon,
 } from '../../shared/typeEffectiveness';
-import {MatBottomSheet} from '@angular/material/bottom-sheet';
-import {Observable} from "rxjs";
-import {selectTypes} from "../store/types-display.selectors";
-import {Store} from "@ngrx/store";
-import {State} from "../store/types-display.reducer";
-import {loadTypes} from "../store/types-display.actions";
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
+import { Observable } from 'rxjs';
+import { selectTypes } from '../store/types-display.selectors';
+import { Store } from '@ngrx/store';
+import { State } from '../store/types-display.reducer';
+import { loadTypes } from '../store/types-display.actions';
 
 @Component({
   selector: 'app-home-page',
   templateUrl: './select-type-page.component.html',
-  styleUrls: ['./select-type-page.component.scss']
+  styleUrls: ['./select-type-page.component.scss'],
 })
 export class SelectTypePageComponent implements OnInit {
   secondTypeOnlyError = '';
   noTypeSelectionError = '';
   doubleType = '';
   pokeType = types;
-  types$: Observable<{name: string; url: string}[]> = this.store.select(selectTypes);
+  types$: Observable<{ name: string; url: string }[]> = this.store.select(
+    selectTypes
+  );
   selection = {
     type1: [],
-    type2: []
+    type2: [],
   };
   bestType = [];
   displayBestType = [];
 
-
-  constructor(private bottomSheet: MatBottomSheet, private store: Store<State>) {
-  }
+  constructor(
+    private bottomSheet: MatBottomSheet,
+    private store: Store<State>
+  ) {}
 
   ngOnInit(): void {
     this.store.dispatch(loadTypes());
@@ -66,10 +69,12 @@ export class SelectTypePageComponent implements OnInit {
     this.displayBestType = [];
     if (this.selection.type1.length === 0) {
       this.noTypeSelectionError = '';
-      return this.secondTypeOnlyError = 'Merci de sélectionner un premier type';
+      return (this.secondTypeOnlyError =
+        'Merci de sélectionner un premier type');
     } else if (this.selection.type1 === type.value) {
       this.selection.type1 = [];
-      this.doubleType = 'Combinaison impossible choisissez un autre second type';
+      this.doubleType =
+        'Combinaison impossible choisissez un autre second type';
       return this.openBottomSheet();
     }
     this.doubleType = '';
@@ -78,11 +83,22 @@ export class SelectTypePageComponent implements OnInit {
 
   getBestTypes() {
     this.displayBestType = [];
-    if (this.selection.type2.length === 0 && this.selection.type1.length === 0 && !this.secondTypeOnlyError) {
-      return this.noTypeSelectionError = 'Merci de sélectionner un ou deux types';
-    } else if (this.selection.type1.length > 0 && this.selection.type2.length > 0) {
+    if (
+      this.selection.type2.length === 0 &&
+      this.selection.type1.length === 0 &&
+      !this.secondTypeOnlyError
+    ) {
+      return (this.noTypeSelectionError =
+        'Merci de sélectionner un ou deux types');
+    } else if (
+      this.selection.type1.length > 0 &&
+      this.selection.type2.length > 0
+    ) {
       for (let i = 0; i < 18; i++) {
-        this.bestType.push([this.pokeType[i], (this.selection.type1[i] * this.selection.type2[i])]);
+        this.bestType.push([
+          this.pokeType[i],
+          this.selection.type1[i] * this.selection.type2[i],
+        ]);
       }
     } else {
       for (let i = 0; i < 18; i++) {
@@ -102,9 +118,12 @@ export class SelectTypePageComponent implements OnInit {
 
   openBottomSheet(): void {
     this.bottomSheet.open(ResultDialogComponent, {
-      data:
-        [this.displayBestType, this.secondTypeOnlyError, this.noTypeSelectionError, this.doubleType]
+      data: [
+        this.displayBestType,
+        this.secondTypeOnlyError,
+        this.noTypeSelectionError,
+        this.doubleType,
+      ],
     });
   }
-
 }

@@ -12,9 +12,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { TypesDisplayEffects } from 'src/app/selectType/store/types-display.effects';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -23,9 +21,9 @@ import { TypesDisplayEffects } from 'src/app/selectType/store/types-display.effe
     SharedModule,
     BrowserAnimationsModule,
     StoreModule.forRoot({}),
-    EffectsModule.forRoot([TypesDisplayEffects])
+    EffectsModule.forRoot([TypesDisplayEffects]),
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

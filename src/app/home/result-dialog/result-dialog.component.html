@@ -1,8 +1,0 @@
-<div class="result-container">
-  <div class="type-container" *ngIf="dataSource[0].length > 0">
-    <button mat-raised-button color="warn" *ngFor="let type of dataSource[0]">{{type[0]}}: {{type[1]}}</button>
-  </div>
-    <div *ngIf="dataSource[1] !== ''">{{dataSource[1]}}</div>
-    <div *ngIf="dataSource[2] !== ''">{{dataSource[2]}}</div>
-    <div *ngIf="dataSource[3] !== ''">{{dataSource[3]}}</div>
-</div>

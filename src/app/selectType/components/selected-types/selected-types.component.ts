@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TypesService } from 'src/app/selectType/services/types.service';
+import { Type } from 'src/app/shared/typeEffectiveness';
 
 @Component({
   selector: 'app-selected-types',
@@ -7,7 +8,7 @@ import { TypesService } from 'src/app/selectType/services/types.service';
   styleUrls: ['./selected-types.component.scss'],
 })
 export class SelectedTypesComponent implements OnInit {
-  selectedTypes: Set<string>;
+  selectedTypes: Set<Type>;
 
   constructor(private typeService: TypesService) {}
 

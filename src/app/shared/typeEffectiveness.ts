@@ -358,23 +358,28 @@ export const fee: number[] = [
   0.5,
   1,
 ];
-export const types: string[] = [
-  'normal',
-  'combat',
-  'vol',
-  'poison',
-  'sol',
-  'roche',
-  'insecte',
-  'spectre',
-  'acier',
-  'feu',
-  'eau',
-  'plante',
-  'electrique',
-  'psy',
-  'glace',
-  'dragon',
-  'tenebres',
-  'fee',
+export const types: Type[] = [
+  { type: 'normal', isSelected: false },
+  { type: 'combat', isSelected: false },
+  { type: 'vol', isSelected: false },
+  { type: 'poison', isSelected: false },
+  { type: 'sol', isSelected: false },
+  { type: 'roche', isSelected: false },
+  { type: 'insecte', isSelected: false },
+  { type: 'spectre', isSelected: false },
+  { type: 'acier', isSelected: false },
+  { type: 'feu', isSelected: false },
+  { type: 'eau', isSelected: false },
+  { type: 'plante', isSelected: false },
+  { type: 'électrique', isSelected: false },
+  { type: 'psy', isSelected: false },
+  { type: 'glace', isSelected: false },
+  { type: 'dragon', isSelected: false },
+  { type: 'ténèbres', isSelected: false },
+  { type: 'féé', isSelected: false },
 ];
+
+export interface Type {
+  type: string;
+  isSelected: boolean;
+}

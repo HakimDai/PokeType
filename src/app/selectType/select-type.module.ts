@@ -13,8 +13,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { TypesDisplayEffects } from 'src/app/selectType/store/types-display.effects';
 import { StoreModule } from '@ngrx/store';
 import * as fromTypesDisplay from 'src/app/selectType/store/types-display.reducer';
-import { SelectedTypesComponent } from './selected-types/selected-types.component';
-import { TypesToSelectComponent } from './types-to-select/types-to-select.component';
+import { SelectedTypesComponent } from './components/selected-types/selected-types.component';
+import { TypesToSelectComponent } from './components/types-to-select/types-to-select.component';
 
 @NgModule({
   declarations: [

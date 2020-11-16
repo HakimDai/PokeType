@@ -1,0 +1,16 @@
+.container {
+  height: 20vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.selectedTypeContainer {
+  min-width: 196px;
+  width: 20vw;
+  display: flex;
+  justify-content: space-evenly;
+}
+button {
+  width: 100px;
+  margin: 0 8px;
+}

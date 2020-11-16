@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ResultDialogComponent } from '../result-dialog/result-dialog.component';
+import { ResultDialogComponent } from 'src/app/selectType/result-dialog/result-dialog.component';
 import {
   insecte,
   tenebres,
@@ -20,13 +20,13 @@ import {
   acier,
   eau,
   dragon,
-} from '../../shared/typeEffectiveness';
+} from 'src/app/shared/typeEffectiveness';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { Observable } from 'rxjs';
-import { selectTypes } from '../store/types-display.selectors';
+import { selectTypes } from 'src/app/selectType/store/types-display.selectors';
 import { Store } from '@ngrx/store';
-import { State } from '../store/types-display.reducer';
-import { loadTypes } from '../store/types-display.actions';
+import { State } from 'src/app/selectType/store/types-display.reducer';
+import { loadTypes } from 'src/app/selectType/store/types-display.actions';
 
 @Component({
   selector: 'app-home-page',

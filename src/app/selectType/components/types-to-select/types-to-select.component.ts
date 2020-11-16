@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { types } from 'src/app/shared/typeEffectiveness';
+import { Type, types } from 'src/app/shared/typeEffectiveness';
 import { TypesService } from 'src/app/selectType/services/types.service';
 import { Subscription } from 'rxjs';
 
@@ -9,8 +9,8 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./types-to-select.component.scss'],
 })
 export class TypesToSelectComponent implements OnInit, OnDestroy {
-  types: string[];
-  selectedTypes: Set<string> = new Set<string>();
+  types: Type[];
+  selectedTypes: Set<Type> = new Set<Type>();
   selectedTypesSubscription: Subscription;
 
   constructor(private typesService: TypesService) {}
@@ -30,7 +30,7 @@ export class TypesToSelectComponent implements OnInit, OnDestroy {
       return this.typesService.selectTypes(type);
     }
     this.selectedTypes.forEach((selectedType) => {
-      if (selectedType === type) {
+      if (selectedType.type === type.type) {
         typeToRemove = true;
       }
     });

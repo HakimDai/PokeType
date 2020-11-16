@@ -1,0 +1,17 @@
+<div class="container">
+  <h2 class="mt-24 text-center">Choisis le(s) type(s) de ton adversaire :</h2>
+  <mat-card>
+    <mat-grid-list cols="3" rowHeight="52px">
+      <mat-grid-tile *ngFor="let type of types" [colspan]="1">
+        <button
+          (click)="selectTypes(type)"
+          [ngClass]="{ selectedType: type.isSelected }"
+          color="accent"
+          mat-raised-button
+        >
+          {{ type.type }}
+        </button>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-card>
+</div>

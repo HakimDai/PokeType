@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="selectedTypeContainer">
+    <button
+      *ngFor="let selectedType of selectedTypes"
+      mat-raised-button
+      color="accent"
+      (click)="removeType(selectedType)"
+    >
+      {{ selectedType.type }}
+    </button>
+  </div>
+</div>

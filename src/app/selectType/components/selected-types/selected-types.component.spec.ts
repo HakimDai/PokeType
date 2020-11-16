@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SelectedTypesComponent } from './selected-types.component';
+import { SelectedTypesComponent } from 'src/app/selectType/components/selected-types/selected-types.component';
 
 describe('SelectedTypesComponent', () => {
   let component: SelectedTypesComponent;

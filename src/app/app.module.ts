@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { TypesDisplayEffects } from 'src/app/selectType/store/types-display.effects';
+import { ResearchTypeModule } from 'src/app/research-type/research-type.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,6 +19,7 @@ import { TypesDisplayEffects } from 'src/app/selectType/store/types-display.effe
     AppRoutingModule,
     HttpClientModule,
     SelectTypeModule,
+    ResearchTypeModule,
     SharedModule,
     BrowserAnimationsModule,
     StoreModule.forRoot({}),

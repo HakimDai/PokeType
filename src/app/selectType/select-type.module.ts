@@ -15,6 +15,7 @@ import { StoreModule } from '@ngrx/store';
 import * as fromTypesDisplay from 'src/app/selectType/store/types-display.reducer';
 import { SelectedTypesComponent } from './components/selected-types/selected-types.component';
 import { TypesToSelectComponent } from './components/types-to-select/types-to-select.component';
+import { ResearchTypeModule } from 'src/app/research-type/research-type.module';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { TypesToSelectComponent } from './components/types-to-select/types-to-se
       fromTypesDisplay.typesDisplayFeatureKey,
       fromTypesDisplay.reducer
     ),
+    ResearchTypeModule,
   ],
 })
 export class SelectTypeModule {}

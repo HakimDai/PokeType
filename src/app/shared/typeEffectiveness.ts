@@ -359,27 +359,28 @@ export const fee: number[] = [
   1,
 ];
 export const types: Type[] = [
-  { type: 'normal', isSelected: false },
-  { type: 'combat', isSelected: false },
-  { type: 'vol', isSelected: false },
-  { type: 'poison', isSelected: false },
-  { type: 'sol', isSelected: false },
-  { type: 'roche', isSelected: false },
-  { type: 'insecte', isSelected: false },
-  { type: 'spectre', isSelected: false },
-  { type: 'acier', isSelected: false },
-  { type: 'feu', isSelected: false },
-  { type: 'eau', isSelected: false },
-  { type: 'plante', isSelected: false },
-  { type: 'électrique', isSelected: false },
-  { type: 'psy', isSelected: false },
-  { type: 'glace', isSelected: false },
-  { type: 'dragon', isSelected: false },
-  { type: 'ténèbres', isSelected: false },
-  { type: 'féé', isSelected: false },
+  { type: 'normal', isSelected: false, damageTaken: normal },
+  { type: 'combat', isSelected: false, damageTaken: combat },
+  { type: 'vol', isSelected: false, damageTaken: vol },
+  { type: 'poison', isSelected: false, damageTaken: poison },
+  { type: 'sol', isSelected: false, damageTaken: sol },
+  { type: 'roche', isSelected: false, damageTaken: roche },
+  { type: 'insecte', isSelected: false, damageTaken: insecte },
+  { type: 'spectre', isSelected: false, damageTaken: spectre },
+  { type: 'acier', isSelected: false, damageTaken: acier },
+  { type: 'feu', isSelected: false, damageTaken: feu },
+  { type: 'eau', isSelected: false, damageTaken: eau },
+  { type: 'plante', isSelected: false, damageTaken: plante },
+  { type: 'électrique', isSelected: false, damageTaken: electrique },
+  { type: 'psy', isSelected: false, damageTaken: psy },
+  { type: 'glace', isSelected: false, damageTaken: glace },
+  { type: 'dragon', isSelected: false, damageTaken: dragon },
+  { type: 'ténèbres', isSelected: false, damageTaken: tenebres },
+  { type: 'féé', isSelected: false, damageTaken: fee },
 ];
 
 export interface Type {
   type: string;
   isSelected: boolean;
+  damageTaken: number[];
 }

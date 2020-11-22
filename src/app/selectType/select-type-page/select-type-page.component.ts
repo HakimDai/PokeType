@@ -27,6 +27,7 @@ import { selectTypes } from 'src/app/selectType/store/types-display.selectors';
 import { Store } from '@ngrx/store';
 import { State } from 'src/app/selectType/store/types-display.reducer';
 import { loadTypes } from 'src/app/selectType/store/types-display.actions';
+import { ResearchTypeService } from 'src/app/research-type/services/research-type.service';
 
 @Component({
   selector: 'app-home-page',
@@ -50,11 +51,17 @@ export class SelectTypePageComponent implements OnInit {
 
   constructor(
     private bottomSheet: MatBottomSheet,
-    private store: Store<State>
+    private store: Store<State>,
+    private researchTypeService: ResearchTypeService
   ) {}
 
   ngOnInit(): void {
     this.store.dispatch(loadTypes());
+    this.researchTypeService.result.subscribe((result) => {
+      if (result) {
+        alert(result);
+      }
+    });
   }
 
   addType1(type) {

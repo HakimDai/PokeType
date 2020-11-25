@@ -7,9 +7,6 @@ import { SelectTypeModule } from 'src/app/selectType/select-type.module';
 import { SharedModule } from './shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-import { StoreModule } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
-import { TypesDisplayEffects } from 'src/app/selectType/store/types-display.effects';
 import { ResearchTypeModule } from 'src/app/research-type/research-type.module';
 
 @NgModule({
@@ -22,8 +19,6 @@ import { ResearchTypeModule } from 'src/app/research-type/research-type.module';
     ResearchTypeModule,
     SharedModule,
     BrowserAnimationsModule,
-    StoreModule.forRoot({}),
-    EffectsModule.forRoot([TypesDisplayEffects]),
   ],
   providers: [],
   bootstrap: [AppComponent],

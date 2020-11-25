@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Type, types } from 'src/app/shared/typeEffectiveness';
 import { BehaviorSubject } from 'rxjs';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { DisplayBestTypesDialogComponent } from 'src/app/research-type/components/display-best-types-dialog/display-best-types-dialog.component';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ResearchTypeService {
   result: BehaviorSubject<string[]> = new BehaviorSubject<string[]>(undefined);
-  constructor() {}
+  constructor(public bestTypeDialog: MatDialog) {}
 
   searchType(selectedTypes: Set<Type>) {
     let bestDamageTypes: string[] = [];
@@ -17,6 +19,9 @@ export class ResearchTypeService {
         return alert('error');
       case 1:
         bestDamageTypes = this.findBestDamageTypes(selectedTypes);
+        this.bestTypeDialog.open(DisplayBestTypesDialogComponent, {
+          data: bestDamageTypes,
+        });
         return this.result.next(bestDamageTypes);
       case 2:
         bestDamageTypes = this.findBestDamageTypes(selectedTypes);
@@ -32,6 +37,9 @@ export class ResearchTypeService {
         const res: string[] = filteredBestDamageTypes
           .sort((a, b) => b.value - a.value)
           .map((result) => Object.values(result)[0]);
+        this.bestTypeDialog.open(DisplayBestTypesDialogComponent, {
+          data: res,
+        });
         return this.result.next(res);
     }
   }

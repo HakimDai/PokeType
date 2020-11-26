@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Type } from 'src/app/shared/typeEffectiveness';
+import { Type } from 'src/app/shared/models/typeEffectiveness.model';
 import { TypesService } from 'src/app/selectType/services/types.service';
 import { ResearchTypeService } from 'src/app/research-type/services/research-type.service';
 

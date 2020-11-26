@@ -359,28 +359,44 @@ export const fee: number[] = [
   1,
 ];
 export const types: Type[] = [
-  { type: 'normal', isSelected: false, damageTaken: normal },
-  { type: 'combat', isSelected: false, damageTaken: combat },
-  { type: 'vol', isSelected: false, damageTaken: vol },
-  { type: 'poison', isSelected: false, damageTaken: poison },
-  { type: 'sol', isSelected: false, damageTaken: sol },
-  { type: 'roche', isSelected: false, damageTaken: roche },
-  { type: 'insecte', isSelected: false, damageTaken: insecte },
-  { type: 'spectre', isSelected: false, damageTaken: spectre },
-  { type: 'acier', isSelected: false, damageTaken: acier },
-  { type: 'feu', isSelected: false, damageTaken: feu },
-  { type: 'eau', isSelected: false, damageTaken: eau },
-  { type: 'plante', isSelected: false, damageTaken: plante },
-  { type: 'électrique', isSelected: false, damageTaken: electrique },
-  { type: 'psy', isSelected: false, damageTaken: psy },
-  { type: 'glace', isSelected: false, damageTaken: glace },
-  { type: 'dragon', isSelected: false, damageTaken: dragon },
-  { type: 'ténèbres', isSelected: false, damageTaken: tenebres },
-  { type: 'féé', isSelected: false, damageTaken: fee },
+  { type: 'normal', enType: 'normal', isSelected: false, damageTaken: normal },
+  {
+    type: 'combat',
+    enType: 'fighting',
+    isSelected: false,
+    damageTaken: combat,
+  },
+  { type: 'vol', enType: 'flying', isSelected: false, damageTaken: vol },
+  { type: 'poison', enType: 'poison', isSelected: false, damageTaken: poison },
+  { type: 'sol', enType: 'ground', isSelected: false, damageTaken: sol },
+  { type: 'roche', enType: 'rock', isSelected: false, damageTaken: roche },
+  { type: 'insecte', enType: 'bug', isSelected: false, damageTaken: insecte },
+  { type: 'spectre', enType: 'ghost', isSelected: false, damageTaken: spectre },
+  { type: 'acier', enType: 'steel', isSelected: false, damageTaken: acier },
+  { type: 'feu', enType: 'fire', isSelected: false, damageTaken: feu },
+  { type: 'eau', enType: 'water', isSelected: false, damageTaken: eau },
+  { type: 'plante', enType: 'grass', isSelected: false, damageTaken: plante },
+  {
+    type: 'électrique',
+    enType: 'electric',
+    isSelected: false,
+    damageTaken: electrique,
+  },
+  { type: 'psy', enType: 'psychic', isSelected: false, damageTaken: psy },
+  { type: 'glace', enType: 'ice', isSelected: false, damageTaken: glace },
+  { type: 'dragon', enType: 'flying', isSelected: false, damageTaken: dragon },
+  {
+    type: 'ténèbres',
+    enType: 'dark',
+    isSelected: false,
+    damageTaken: tenebres,
+  },
+  { type: 'féé', enType: 'fairy', isSelected: false, damageTaken: fee },
 ];
 
 export interface Type {
   type: string;
+  enType: string;
   isSelected: boolean;
   damageTaken: number[];
 }

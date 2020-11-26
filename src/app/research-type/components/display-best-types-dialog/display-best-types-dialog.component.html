@@ -2,6 +2,11 @@
 <div mat-dialog-content>
   Les meilleurs types sont:
   <ul>
-    <li *ngFor="let bestType of data">{{ bestType }}</li>
+    <li *ngFor="let pokemon of pokemonsToDisplay">
+      <div>
+        <div>{{ pokemon.name }}</div>
+        <img src="{{ pokemon.image['official-artwork'].front_default }}" />
+      </div>
+    </li>
   </ul>
 </div>

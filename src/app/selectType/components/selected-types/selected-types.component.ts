@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TypesService } from 'src/app/selectType/services/types.service';
-import { Type } from 'src/app/shared/typeEffectiveness';
+import { Type } from 'src/app/shared/models/typeEffectiveness.model';
 
 @Component({
   selector: 'app-selected-types',

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { TypeFetchResult } from 'src/app/selectType/models/typeFetchResult';
-import { Type } from 'src/app/shared/typeEffectiveness';
+import { Type } from 'src/app/shared/models/typeEffectiveness.model';
 
 @Injectable({
   providedIn: 'root',

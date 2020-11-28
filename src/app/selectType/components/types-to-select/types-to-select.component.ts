@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Type, types } from 'src/app/shared/typeEffectiveness';
+import { Type, types } from 'src/app/shared/models/typeEffectiveness.model';
 import { TypesService } from 'src/app/selectType/services/types.service';
 import { Subscription } from 'rxjs';
 

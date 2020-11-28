@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>Résultats</h1>
+<div mat-dialog-content>
+  Les meilleurs types sont:
+  <ul>
+    <li *ngFor="let pokemon of pokemons">
+      <div>
+        <div>{{ pokemon.name }}</div>
+        <img src="{{ pokemon.image['official-artwork'].front_default }}" />
+      </div>
+    </li>
+  </ul>
+</div>

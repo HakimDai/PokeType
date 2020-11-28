@@ -11,8 +11,8 @@ export class RequestPokemonService {
 
   constructor(private http: HttpClient) {}
 
-  getPokemonsOfThisType(type): Observable<TypeDetails[]> {
-    return this.http.get<TypeDetails[]>(`${this.apiUrl}/type/${type}`);
+  getPokemonsOfThisType(type): Observable<TypeDetails> {
+    return this.http.get<TypeDetails>(`${this.apiUrl}/type/${type}`);
   }
 
   getPokemons(pokemon: string): Observable<any> {

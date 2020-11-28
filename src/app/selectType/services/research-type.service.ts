@@ -40,7 +40,13 @@ export class ResearchTypeService {
   result: BehaviorSubject<
     { type: string; enType: string }[]
   > = new BehaviorSubject<{ type: string; enType: string }[]>(undefined);
-  pokemonsListBytypes: TypeDetails[] = [];
+  pokemonsListBytypes: {
+    pokemon: {
+      name: string;
+      url: string;
+    };
+    slot: number;
+  }[] = [];
 
   constructor(
     public bestTypeDialog: MatDialog,
@@ -105,23 +111,20 @@ export class ResearchTypeService {
         this.requestPokemonService.getPokemonsOfThisType(types[i].enType)
       );
     }
-    forkJoin(pokemonsOfTheseTypes).subscribe(
-      (pokemons: Observable<TypeDetails[]>[]) => {
-        pokemons.forEach((pokies) => {
-          this.pokemonsListBytypes.push(pokies[0].pokemon);
-        });
-        this.getRandomPokemonsOfTheseTypes(this.pokemonsListBytypes);
-      }
-    );
+    forkJoin(pokemonsOfTheseTypes).subscribe((pokemons) => {
+      pokemons.forEach((pokies: TypeDetails) => {
+        this.pokemonsListBytypes.push(pokies.pokemon);
+      });
+      this.getRandomPokemonsOfTheseTypes(this.pokemonsListBytypes);
+    });
   }
 
   getRandomPokemonsOfTheseTypes(pokemonList) {
     let pokemonsToGet: Observable<any>[] = [];
     pokemonList.forEach((pokemonsOfOneType) => {
-      let random: number = Math.floor(Math.random() * 70);
+      let random: number = Math.floor(Math.random() * 50);
       pokemonsToGet.push(pokemonsOfOneType[random].pokemon.name);
     });
-    console.log(pokemonsToGet);
     this.requestForPokemon(pokemonsToGet);
   }
 

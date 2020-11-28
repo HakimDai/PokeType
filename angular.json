@@ -64,7 +64,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "pokeType:build"
+            "browserTarget": "pokeType:build",
+            "proxyConfig": "./src/proxy.conf.json"
           },
           "configurations": {
             "production": {

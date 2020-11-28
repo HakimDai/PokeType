@@ -7,7 +7,6 @@ import { SelectTypeModule } from 'src/app/selectType/select-type.module';
 import { SharedModule } from './shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-import { ResearchTypeModule } from 'src/app/research-type/research-type.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -16,7 +15,6 @@ import { ResearchTypeModule } from 'src/app/research-type/research-type.module';
     AppRoutingModule,
     HttpClientModule,
     SelectTypeModule,
-    ResearchTypeModule,
     SharedModule,
     BrowserAnimationsModule,
   ],

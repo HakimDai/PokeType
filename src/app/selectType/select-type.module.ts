@@ -10,13 +10,17 @@ import { MatCardModule } from '@angular/material/card';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { SelectedTypesComponent } from './components/selected-types/selected-types.component';
 import { TypesToSelectComponent } from './components/types-to-select/types-to-select.component';
-import { ResearchTypeModule } from 'src/app/research-type/research-type.module';
+import { ResearchButtonComponent } from 'src/app/selectType/components/research-button/research-button.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ResultsDialogComponent } from 'src/app/selectType/components/display-best-types-dialog/results-dialog.component';
 
 @NgModule({
   declarations: [
     SelectTypePageComponent,
     SelectedTypesComponent,
     TypesToSelectComponent,
+    ResearchButtonComponent,
+    ResultsDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -26,7 +30,7 @@ import { ResearchTypeModule } from 'src/app/research-type/research-type.module';
     MatGridListModule,
     MatCardModule,
     MatBottomSheetModule,
-    ResearchTypeModule,
+    MatDialogModule,
   ],
 })
 export class SelectTypeModule {}

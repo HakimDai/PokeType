@@ -7,12 +7,12 @@ import { TypeDetails } from 'src/app/shared/models/typeDetails.model';
   providedIn: 'root',
 })
 export class RequestPokemonService {
-  apiUrl: string = 'http://localhost:4200/api';
+  apiUrl = 'http://localhost:4200/api';
 
   constructor(private http: HttpClient) {}
 
-  getPokemonsOfThisType(type): Observable<TypeDetails> {
-    return this.http.get<TypeDetails>(`${this.apiUrl}/type/${type}`);
+  getPokemonsOfThisType(type): Observable<TypeDetails[]> {
+    return this.http.get<TypeDetails[]>(`${this.apiUrl}/type/${type}`);
   }
 
   getPokemons(pokemon: string): Observable<any> {

@@ -1,21 +1,46 @@
 import { Injectable } from '@angular/core';
 import { Type, types } from 'src/app/shared/models/typeEffectiveness.model';
-import { BehaviorSubject, forkJoin } from 'rxjs';
+import { BehaviorSubject, forkJoin, Observable } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
-import { DisplayBestTypesDialogComponent } from 'src/app/research-type/components/display-best-types-dialog/display-best-types-dialog.component';
-import { RequestPokemonService } from 'src/app/research-type/services/request-pokemon.service';
+import { ResultsDialogComponent } from 'src/app/selectType/components/display-best-types-dialog/results-dialog.component';
+import { RequestPokemonService } from 'src/app/selectType/services/request-pokemon.service';
+import { TypeDetails } from 'src/app/shared/models/typeDetails.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ResearchTypeService {
   thePokemons: BehaviorSubject<
-    { name: string; image: string }[]
-  > = new BehaviorSubject<{ name: string; image: string }[]>([]);
+    {
+      name: string;
+      image: {
+        dream_world: {
+          front_default: string;
+          front_female: string;
+        };
+        ['official-artwork']: {
+          front_default: string;
+        };
+      };
+    }[]
+  > = new BehaviorSubject<
+    {
+      name: string;
+      image: {
+        dream_world: {
+          front_default: string;
+          front_female: string;
+        };
+        ['official-artwork']: {
+          front_default: string;
+        };
+      };
+    }[]
+  >([]);
   result: BehaviorSubject<
     { type: string; enType: string }[]
   > = new BehaviorSubject<{ type: string; enType: string }[]>(undefined);
-  pokemonsListBytypes = [];
+  pokemonsListBytypes: TypeDetails[] = [];
 
   constructor(
     public bestTypeDialog: MatDialog,
@@ -30,7 +55,7 @@ export class ResearchTypeService {
         return alert('error');
       case 1:
         bestDamageTypes = this.findBestDamageTypes(selectedTypes);
-        this.bestTypeDialog.open(DisplayBestTypesDialogComponent);
+        this.bestTypeDialog.open(ResultsDialogComponent);
         return this.result.next(bestDamageTypes);
       case 2:
         bestDamageTypes = this.findBestDamageTypes(selectedTypes);
@@ -50,7 +75,7 @@ export class ResearchTypeService {
         }[] = filteredBestDamageTypes
           .sort((a, b) => b.value - a.value)
           .map((result) => Object.values(result)[0]);
-        this.bestTypeDialog.open(DisplayBestTypesDialogComponent);
+        this.bestTypeDialog.open(ResultsDialogComponent);
         return this.result.next(res);
     }
   }
@@ -73,47 +98,47 @@ export class ResearchTypeService {
   }
 
   getPokemonsOfTheseTypes(types: { type: string; enType: string }[]) {
+    let pokemonsOfTheseTypes = [];
+    this.pokemonsListBytypes = [];
     for (let i = 0; i < types.length; i++) {
-      this.requestPokemonService
-        .getPokemonsOfThisType(types[i].enType)
-        .subscribe((result) => this.pokemonsListBytypes.push(result[0]));
+      pokemonsOfTheseTypes.push(
+        this.requestPokemonService.getPokemonsOfThisType(types[i].enType)
+      );
     }
-    this.makeDelay(this.pokemonsListBytypes, types);
-    this.pokemonsListBytypes = this.getRandomPokemonsOfTheseTypes(
-      this.pokemonsListBytypes
+    forkJoin(pokemonsOfTheseTypes).subscribe(
+      (pokemons: Observable<TypeDetails[]>[]) => {
+        pokemons.forEach((pokies) => {
+          this.pokemonsListBytypes.push(pokies[0].pokemon);
+        });
+        this.getRandomPokemonsOfTheseTypes(this.pokemonsListBytypes);
+      }
     );
-    console.log(this.pokemonsListBytypes);
-    return this.requestForPokemon(this.pokemonsListBytypes);
   }
 
   getRandomPokemonsOfTheseTypes(pokemonList) {
-    let pokemonsOfTheseTypes = [];
-    for (let i = 0; i < pokemonList.length; i++) {
-      const randomNumber = Math.floor(Math.random() * 50);
-      pokemonsOfTheseTypes.push(pokemonList[i][randomNumber]);
-    }
-    return pokemonsOfTheseTypes;
-  }
-
-  makeDelay(list, secondlist) {
-    while (list.length !== secondlist.length) {
-      this.makeDelay(list, secondlist);
-    }
+    let pokemonsToGet: Observable<any>[] = [];
+    pokemonList.forEach((pokemonsOfOneType) => {
+      let random: number = Math.floor(Math.random() * 70);
+      pokemonsToGet.push(pokemonsOfOneType[random].pokemon.name);
+    });
+    console.log(pokemonsToGet);
+    this.requestForPokemon(pokemonsToGet);
   }
 
   requestForPokemon(pokemons) {
-    let thePokemons = [];
+    let pokemonsGetter: Observable<any>[] = [];
+    let pokemonsGot = [];
     for (let pokemon of pokemons) {
-      this.requestPokemonService
-        .getPokemons(pokemon.pokemon.name)
-        .subscribe((pokemon) => {
-          thePokemons.push({
-            name: pokemon.name,
-            image: pokemon.sprites.other,
-          });
-        });
+      pokemonsGetter.push(this.requestPokemonService.getPokemons(pokemon));
     }
-    this.makeDelay(thePokemons, pokemons);
-    this.thePokemons.next(thePokemons);
+    forkJoin(pokemonsGetter).subscribe((results) => {
+      results.forEach((pokemonGot) => {
+        pokemonsGot.push({
+          name: pokemonGot.name,
+          image: pokemonGot.sprites.other,
+        });
+      });
+      this.thePokemons.next(pokemonsGot);
+    });
   }
 }

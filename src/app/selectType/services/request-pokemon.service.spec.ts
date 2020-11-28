@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { RequestPokemonService } from './request-pokemon.service';
+import { RequestPokemonService } from 'src/app/selectType/services/request-pokemon.service';
 
 describe('RequestPokemonService', () => {
   let service: RequestPokemonService;

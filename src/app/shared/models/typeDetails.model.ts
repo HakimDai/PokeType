@@ -59,5 +59,5 @@ export interface TypeDetails {
       url: string;
     };
     slot: number;
-  }[];
+  };
 }

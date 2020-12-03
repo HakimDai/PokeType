@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SelectTypePageComponent } from 'src/app/selectType/select-type-page/select-type-page.component';
+import { SelectTypePageComponent } from 'src/app/selectType/pages/select-type-page/select-type-page.component';
 
 describe('HomePageComponent', () => {
   let component: SelectTypePageComponent;

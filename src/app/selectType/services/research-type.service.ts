@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { Type, types } from 'src/app/shared/models/typeEffectiveness.model';
 import { BehaviorSubject, forkJoin, Observable } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
-import { ResultsDialogComponent } from 'src/app/selectType/components/display-best-types-dialog/results-dialog.component';
 import { RequestPokemonService } from 'src/app/selectType/services/request-pokemon.service';
 import { TypeDetails } from 'src/app/shared/models/typeDetails.model';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -49,8 +49,8 @@ export class ResearchTypeService {
   }[] = [];
 
   constructor(
-    public bestTypeDialog: MatDialog,
-    public requestPokemonService: RequestPokemonService
+    public requestPokemonService: RequestPokemonService,
+    public router: Router
   ) {}
 
   searchType(selectedTypes: Set<Type>) {
@@ -61,7 +61,7 @@ export class ResearchTypeService {
         return alert('error');
       case 1:
         bestDamageTypes = this.findBestDamageTypes(selectedTypes);
-        this.bestTypeDialog.open(ResultsDialogComponent);
+        this.router.navigate(['results']);
         return this.result.next(bestDamageTypes);
       case 2:
         bestDamageTypes = this.findBestDamageTypes(selectedTypes);
@@ -81,7 +81,7 @@ export class ResearchTypeService {
         }[] = filteredBestDamageTypes
           .sort((a, b) => b.value - a.value)
           .map((result) => Object.values(result)[0]);
-        this.bestTypeDialog.open(ResultsDialogComponent);
+        this.router.navigate(['results']);
         return this.result.next(res);
     }
   }

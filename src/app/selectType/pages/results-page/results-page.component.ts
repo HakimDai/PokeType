@@ -1,18 +1,18 @@
-import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { TypesService } from 'src/app/selectType/services/types.service';
-import { Type } from 'src/app/shared/models/typeEffectiveness.model';
-import { RequestPokemonService } from 'src/app/selectType/services/request-pokemon.service';
-import { Observable, Subscription } from 'rxjs';
 import { ResearchTypeService } from 'src/app/selectType/services/research-type.service';
+import { Type } from 'src/app/shared/models/typeEffectiveness.model';
 
 @Component({
-  selector: 'app-results-dialog',
-  templateUrl: './results-dialog.component.html',
-  styleUrls: ['./results-dialog.component.scss'],
+  selector: 'app-results-page',
+  templateUrl: './results-page.component.html',
+  styleUrls: ['./results-page.component.scss'],
 })
-export class ResultsDialogComponent implements OnInit, OnDestroy {
+export class ResultsPageComponent implements OnInit, OnDestroy {
   pokemonsToDisplay;
+  numberOfColumnsToDisplay: number;
+  heightOfColumnsToDisplay: string;
   pokemons: {
     name: string;
     image: {
@@ -41,7 +41,10 @@ export class ResultsDialogComponent implements OnInit, OnDestroy {
           this.pokemonsToDisplay
         );
         this.thePokemonsSubscription = this.researchTypeService.thePokemons.subscribe(
-          (result) => (this.pokemons = result)
+          (result) => {
+            this.pokemons = result;
+            this.defineNumberOfColumnsToDisplay();
+          }
         );
       }
     );
@@ -57,5 +60,21 @@ export class ResultsDialogComponent implements OnInit, OnDestroy {
     this.researchTypeService.result.next([]);
     this.resultSubscription.unsubscribe();
     this.thePokemonsSubscription.unsubscribe();
+  }
+
+  defineNumberOfColumnsToDisplay() {
+    if (this.pokemons.length === 1 || this.pokemons.length === 3) {
+      this.numberOfColumnsToDisplay = 1;
+      return this.numberOfColumnsToDisplay;
+    } else if (
+      this.pokemons.length === 2 ||
+      (this.pokemons.length >= 4 && this.pokemons.length <= 6)
+    ) {
+      this.numberOfColumnsToDisplay = 2;
+      return (this.numberOfColumnsToDisplay = 2);
+    } else {
+      this.numberOfColumnsToDisplay = 3;
+      return (this.numberOfColumnsToDisplay = 3);
+    }
   }
 }

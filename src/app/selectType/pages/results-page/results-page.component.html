@@ -1,0 +1,19 @@
+<div class="container">
+  <h1>Résultats</h1>
+  <mat-card>
+    <mat-grid-list [cols]="numberOfColumnsToDisplay" rowHeight="20vh">
+      <mat-grid-tile *ngFor="let pokemon of pokemons" [colspan]="1">
+        <div class="result-container">
+          <div>{{ pokemon.name }}</div>
+          <img
+            src="{{ pokemon.image['official-artwork'].front_default }}"
+            class="pokemon-image"
+          />
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-card>
+  <div class="container-button">
+    <button mat-raised-button color="warn">Nouvelle recherche</button>
+  </div>
+</div>

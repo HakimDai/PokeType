@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { SelectTypeRoutingModule } from 'src/app/selectType/select-type-routing.module';
-import { SelectTypePageComponent } from 'src/app/selectType/select-type-page/select-type-page.component';
+import { SelectTypePageComponent } from 'src/app/selectType/pages/select-type-page/select-type-page.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -12,7 +12,7 @@ import { SelectedTypesComponent } from './components/selected-types/selected-typ
 import { TypesToSelectComponent } from './components/types-to-select/types-to-select.component';
 import { ResearchButtonComponent } from 'src/app/selectType/components/research-button/research-button.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { ResultsDialogComponent } from 'src/app/selectType/components/display-best-types-dialog/results-dialog.component';
+import { ResultsPageComponent } from 'src/app/selectType/pages/results-page/results-page.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +20,7 @@ import { ResultsDialogComponent } from 'src/app/selectType/components/display-be
     SelectedTypesComponent,
     TypesToSelectComponent,
     ResearchButtonComponent,
-    ResultsDialogComponent,
+    ResultsPageComponent,
   ],
   imports: [
     CommonModule,

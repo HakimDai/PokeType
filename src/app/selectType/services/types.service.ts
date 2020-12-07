@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { TypeFetchResult } from 'src/app/selectType/models/typeFetchResult';
 import { Type } from 'src/app/shared/models/typeEffectiveness.model';
 
@@ -12,7 +12,6 @@ export class TypesService {
   selectedTypes$: BehaviorSubject<Set<Type>> = new BehaviorSubject<Set<Type>>(
     new Set<Type>()
   );
-  errorMessage$: Subject<string> = new Subject<string>();
   selectedTypes: Set<Type> = new Set<Type>();
 
   constructor(private http: HttpClient) {}

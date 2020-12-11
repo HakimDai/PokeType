@@ -115,7 +115,7 @@ export class ResearchTypeService {
       pokemons.forEach((pokies: TypeDetails) => {
         this.pokemonsListBytypes.push(pokies.pokemon);
       });
-      this.getRandomPokemonsOfTheseTypes(this.pokemonsListBytypes);
+      return this.getRandomPokemonsOfTheseTypes(this.pokemonsListBytypes);
     });
   }
 
@@ -125,7 +125,7 @@ export class ResearchTypeService {
       let random: number = Math.floor(Math.random() * 50);
       pokemonsToGet.push(pokemonsOfOneType[random].pokemon.name);
     });
-    this.requestForPokemon(pokemonsToGet);
+    return this.requestForPokemon(pokemonsToGet);
   }
 
   requestForPokemon(pokemons) {
@@ -143,5 +143,6 @@ export class ResearchTypeService {
       });
       this.thePokemons.next(pokemonsGot);
     });
+    return pokemonsGot;
   }
 }

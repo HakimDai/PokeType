@@ -33,22 +33,7 @@ export class ResultsPageComponent implements OnInit, OnDestroy {
     private researchTypeService: ResearchTypeService
   ) {}
 
-  ngOnInit(): void {
-    this.resultSubscription = this.researchTypeService.result.subscribe(
-      (result) => {
-        this.pokemonsToDisplay = result;
-        this.researchTypeService.getPokemonsOfTheseTypes(
-          this.pokemonsToDisplay
-        );
-        this.thePokemonsSubscription = this.researchTypeService.thePokemons.subscribe(
-          (result) => {
-            this.pokemons = result;
-            this.defineNumberOfColumnsToDisplay();
-          }
-        );
-      }
-    );
-  }
+  ngOnInit(): void {}
 
   ngOnDestroy() {
     this.typeService.selectedTypes.forEach((type) => (type.isSelected = false));

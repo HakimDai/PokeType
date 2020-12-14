@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { TypesService } from 'src/app/selectType/services/types.service';
 import { ResearchTypeService } from 'src/app/selectType/services/research-type.service';
 import { Type } from 'src/app/shared/models/typeEffectiveness.model';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-results-page',
@@ -30,10 +31,16 @@ export class ResultsPageComponent implements OnInit, OnDestroy {
 
   constructor(
     private typeService: TypesService,
-    private researchTypeService: ResearchTypeService
+    private researchTypeService: ResearchTypeService,
+    private activatedRoute: ActivatedRoute
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.activatedRoute.data.subscribe((data: { results: [] }) => {
+      console.log(data);
+      this.pokemonsToDisplay = data.results;
+    });
+  }
 
   ngOnDestroy() {
     this.typeService.selectedTypes.forEach((type) => (type.isSelected = false));

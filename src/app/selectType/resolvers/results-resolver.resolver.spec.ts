@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ResultsResolverResolver } from './results-resolver.resolver';
+import { ResultsResolver } from 'src/app/selectType/resolvers/results-resolver.service';
 
 describe('ResultsResolverResolver', () => {
-  let resolver: ResultsResolverResolver;
+  let resolver: ResultsResolver;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    resolver = TestBed.inject(ResultsResolverResolver);
+    resolver = TestBed.inject(ResultsResolver);
   });
 
   it('should be created', () => {

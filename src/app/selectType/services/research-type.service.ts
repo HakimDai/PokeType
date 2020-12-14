@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Type, types } from 'src/app/shared/models/typeEffectiveness.model';
-import { BehaviorSubject, forkJoin, Observable } from 'rxjs';
+import { BehaviorSubject, forkJoin, Observable, of } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { RequestPokemonService } from 'src/app/selectType/services/request-pokemon.service';
 import { TypeDetails } from 'src/app/shared/models/typeDetails.model';
@@ -111,16 +111,16 @@ export class ResearchTypeService {
         this.requestPokemonService.getPokemonsOfThisType(types[i].enType)
       );
     }
-    forkJoin(pokemonsOfTheseTypes).subscribe((pokemons) => {
+    return forkJoin(pokemonsOfTheseTypes).subscribe((pokemons) => {
       pokemons.forEach((pokies: TypeDetails) => {
         this.pokemonsListBytypes.push(pokies.pokemon);
       });
-      return this.getRandomPokemonsOfTheseTypes(this.pokemonsListBytypes);
+      this.getRandomPokemonsOfTheseTypes(this.pokemonsListBytypes);
     });
   }
 
   getRandomPokemonsOfTheseTypes(pokemonList) {
-    let pokemonsToGet: Observable<any>[] = [];
+    let pokemonsToGet = [];
     pokemonList.forEach((pokemonsOfOneType) => {
       let random: number = Math.floor(Math.random() * 50);
       pokemonsToGet.push(pokemonsOfOneType[random].pokemon.name);
@@ -142,7 +142,7 @@ export class ResearchTypeService {
         });
       });
       this.thePokemons.next(pokemonsGot);
+      return pokemonsGot;
     });
-    return pokemonsGot;
   }
 }

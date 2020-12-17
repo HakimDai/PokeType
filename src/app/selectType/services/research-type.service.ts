@@ -82,6 +82,7 @@ export class ResearchTypeService {
           .sort((a, b) => b.value - a.value)
           .map((result) => Object.values(result)[0]);
         this.router.navigate(['results']);
+        this.getPokemonsOfTheseTypes(res);
         return this.result.next(res);
     }
   }
@@ -105,18 +106,12 @@ export class ResearchTypeService {
 
   getPokemonsOfTheseTypes(types: { type: string; enType: string }[]) {
     let pokemonsOfTheseTypes = [];
-    this.pokemonsListBytypes = [];
     for (let i = 0; i < types.length; i++) {
       pokemonsOfTheseTypes.push(
         this.requestPokemonService.getPokemonsOfThisType(types[i].enType)
       );
     }
-    return forkJoin(pokemonsOfTheseTypes).subscribe((pokemons) => {
-      pokemons.forEach((pokies: TypeDetails) => {
-        this.pokemonsListBytypes.push(pokies.pokemon);
-      });
-      this.getRandomPokemonsOfTheseTypes(this.pokemonsListBytypes);
-    });
+    return forkJoin(pokemonsOfTheseTypes);
   }
 
   getRandomPokemonsOfTheseTypes(pokemonList) {
@@ -125,7 +120,7 @@ export class ResearchTypeService {
       let random: number = Math.floor(Math.random() * 50);
       pokemonsToGet.push(pokemonsOfOneType[random].pokemon.name);
     });
-    return this.requestForPokemon(pokemonsToGet);
+    return pokemonsToGet;
   }
 
   requestForPokemon(pokemons) {
@@ -134,15 +129,6 @@ export class ResearchTypeService {
     for (let pokemon of pokemons) {
       pokemonsGetter.push(this.requestPokemonService.getPokemons(pokemon));
     }
-    forkJoin(pokemonsGetter).subscribe((results) => {
-      results.forEach((pokemonGot) => {
-        pokemonsGot.push({
-          name: pokemonGot.name,
-          image: pokemonGot.sprites.other,
-        });
-      });
-      this.thePokemons.next(pokemonsGot);
-      return pokemonsGot;
-    });
+    return forkJoin(pokemonsGetter);
   }
 }

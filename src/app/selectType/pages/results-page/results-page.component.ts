@@ -25,6 +25,15 @@ export class ResultsPageComponent implements OnInit, OnDestroy {
         front_default: string;
       };
     };
+    types: [
+      {
+        slot: number;
+        type: {
+          name: string;
+          url: string;
+        };
+      }
+    ];
   }[] = [];
   resultSubscription: Subscription;
   thePokemonsSubscription: Subscription;
@@ -39,6 +48,22 @@ export class ResultsPageComponent implements OnInit, OnDestroy {
     this.activatedRoute.data.subscribe((data: { results: [] }) => {
       console.log(data);
       this.pokemonsToDisplay = data.results;
+      data.results.forEach((pokemon) => {
+        this.pokemons.push({
+          name: pokemon.name,
+          image: {
+            dream_world: {
+              front_default: pokemon.sprites.other.dream_world.front_default,
+              front_female: pokemon.sprites.other.dream_world.front_female,
+            },
+            'official-artwork': {
+              front_default:
+                pokemon.sprites.other['official-artwork'].front_default,
+            },
+          },
+          types: pokemon.types,
+        });
+      });
     });
   }
 

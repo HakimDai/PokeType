@@ -4,6 +4,7 @@ import { TypesService } from 'src/app/selectType/services/types.service';
 import { ResearchTypeService } from 'src/app/selectType/services/research-type.service';
 import { Type } from 'src/app/shared/models/typeEffectiveness.model';
 import { ActivatedRoute } from '@angular/router';
+import { log } from 'util';
 
 @Component({
   selector: 'app-results-page',

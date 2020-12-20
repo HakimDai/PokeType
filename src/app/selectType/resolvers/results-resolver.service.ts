@@ -44,9 +44,10 @@ export class ResultsResolver implements Resolve<any> {
                   this.pokemonsListBytypes
                 )
               ).pipe(
-                mergeMap((pokemons) =>
-                  this.researchTypeService.requestForPokemon(pokemons)
-                )
+                mergeMap((pokemons) => {
+                  this.pokemonsListBytypes = [];
+                  return this.researchTypeService.requestForPokemon(pokemons);
+                })
               )
             )
         )

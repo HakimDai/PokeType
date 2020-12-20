@@ -1,4 +1,7 @@
 <main class="mat-app-background">
   <app-nav-bar></app-nav-bar>
-  <router-outlet></router-outlet>
+  <div *ngIf="displaySpinner" class="spinner-container">
+    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+  </div>
+  <router-outlet *ngIf="!displaySpinner"></router-outlet>
 </main>

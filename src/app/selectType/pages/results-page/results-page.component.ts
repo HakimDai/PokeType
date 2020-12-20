@@ -13,7 +13,6 @@ import { ActivatedRoute } from '@angular/router';
 export class ResultsPageComponent implements OnInit, OnDestroy {
   pokemonsToDisplay;
   numberOfColumnsToDisplay: number;
-  heightOfColumnsToDisplay: string;
   pokemons: {
     name: string;
     image: {
@@ -36,7 +35,6 @@ export class ResultsPageComponent implements OnInit, OnDestroy {
     ];
   }[] = [];
   resultSubscription: Subscription;
-  thePokemonsSubscription: Subscription;
 
   constructor(
     private typeService: TypesService,
@@ -45,10 +43,13 @@ export class ResultsPageComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.resultSubscription = this.researchTypeService.result.subscribe(
+      (results) => {
+        this.pokemonsToDisplay = results;
+      }
+    );
     this.activatedRoute.data.subscribe((data: { results: [] }) => {
-      console.log(data);
-      this.pokemonsToDisplay = data.results;
-      data.results.forEach((pokemon) => {
+      data.results.forEach((pokemon: any, index) => {
         this.pokemons.push({
           name: pokemon.name,
           image: {
@@ -61,9 +62,12 @@ export class ResultsPageComponent implements OnInit, OnDestroy {
                 pokemon.sprites.other['official-artwork'].front_default,
             },
           },
-          types: pokemon.types,
+          types: pokemon.types.filter(
+            (type) => type.type.name === this.pokemonsToDisplay[index].enType
+          ),
         });
       });
+      this.defineNumberOfColumnsToDisplay();
     });
   }
 
@@ -72,11 +76,9 @@ export class ResultsPageComponent implements OnInit, OnDestroy {
     this.typeService.selectedTypes$.next(
       (this.typeService.selectedTypes = new Set<Type>())
     );
-    this.pokemonsToDisplay = [];
     this.pokemons = [];
     this.researchTypeService.result.next([]);
     this.resultSubscription.unsubscribe();
-    this.thePokemonsSubscription.unsubscribe();
   }
 
   defineNumberOfColumnsToDisplay() {

@@ -1,42 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Type, types } from 'src/app/shared/models/typeEffectiveness.model';
-import { BehaviorSubject, forkJoin, Observable, of } from 'rxjs';
-import { MatDialog } from '@angular/material/dialog';
+import { BehaviorSubject, forkJoin, Observable } from 'rxjs';
 import { RequestPokemonService } from 'src/app/selectType/services/request-pokemon.service';
-import { TypeDetails } from 'src/app/shared/models/typeDetails.model';
 import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ResearchTypeService {
-  thePokemons: BehaviorSubject<
-    {
-      name: string;
-      image: {
-        dream_world: {
-          front_default: string;
-          front_female: string;
-        };
-        ['official-artwork']: {
-          front_default: string;
-        };
-      };
-    }[]
-  > = new BehaviorSubject<
-    {
-      name: string;
-      image: {
-        dream_world: {
-          front_default: string;
-          front_female: string;
-        };
-        ['official-artwork']: {
-          front_default: string;
-        };
-      };
-    }[]
-  >([]);
   result: BehaviorSubject<
     { type: string; enType: string }[]
   > = new BehaviorSubject<{ type: string; enType: string }[]>(undefined);
@@ -125,7 +96,6 @@ export class ResearchTypeService {
 
   requestForPokemon(pokemons) {
     let pokemonsGetter: Observable<any>[] = [];
-    let pokemonsGot = [];
     for (let pokemon of pokemons) {
       pokemonsGetter.push(this.requestPokemonService.getPokemons(pokemon));
     }

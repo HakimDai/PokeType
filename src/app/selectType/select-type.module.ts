@@ -13,6 +13,7 @@ import { TypesToSelectComponent } from './components/types-to-select/types-to-se
 import { ResearchButtonComponent } from 'src/app/selectType/components/research-button/research-button.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ResultsPageComponent } from 'src/app/selectType/pages/results-page/results-page.component';
+import { ResultsResolver } from './resolvers/results-resolver.service';
 
 @NgModule({
   declarations: [
@@ -32,5 +33,6 @@ import { ResultsPageComponent } from 'src/app/selectType/pages/results-page/resu
     MatBottomSheetModule,
     MatDialogModule,
   ],
+  providers: [ResultsResolver],
 })
 export class SelectTypeModule {}

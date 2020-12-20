@@ -4,6 +4,11 @@
     <mat-grid-list [cols]="numberOfColumnsToDisplay" rowHeight="20vh">
       <mat-grid-tile *ngFor="let pokemon of pokemons" [colspan]="1">
         <div class="result-container">
+          <div>
+            <span *ngFor="let pokemonType of pokemon.types">
+              {{ pokemonType.type.name }}
+            </span>
+          </div>
           <div>{{ pokemon.name }}</div>
           <img
             src="{{ pokemon.image['official-artwork'].front_default }}"
@@ -14,6 +19,8 @@
     </mat-grid-list>
   </mat-card>
   <div class="container-button">
-    <button mat-raised-button color="warn">Nouvelle recherche</button>
+    <button mat-raised-button color="warn" routerLink="/home">
+      Nouvelle recherche
+    </button>
   </div>
 </div>

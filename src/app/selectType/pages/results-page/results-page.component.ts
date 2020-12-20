@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { TypesService } from 'src/app/selectType/services/types.service';
 import { ResearchTypeService } from 'src/app/selectType/services/research-type.service';
 import { Type } from 'src/app/shared/models/typeEffectiveness.model';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-results-page',
@@ -12,7 +13,6 @@ import { Type } from 'src/app/shared/models/typeEffectiveness.model';
 export class ResultsPageComponent implements OnInit, OnDestroy {
   pokemonsToDisplay;
   numberOfColumnsToDisplay: number;
-  heightOfColumnsToDisplay: string;
   pokemons: {
     name: string;
     image: {
@@ -24,30 +24,51 @@ export class ResultsPageComponent implements OnInit, OnDestroy {
         front_default: string;
       };
     };
+    types: [
+      {
+        slot: number;
+        type: {
+          name: string;
+          url: string;
+        };
+      }
+    ];
   }[] = [];
   resultSubscription: Subscription;
-  thePokemonsSubscription: Subscription;
 
   constructor(
     private typeService: TypesService,
-    private researchTypeService: ResearchTypeService
+    private researchTypeService: ResearchTypeService,
+    private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
     this.resultSubscription = this.researchTypeService.result.subscribe(
-      (result) => {
-        this.pokemonsToDisplay = result;
-        this.researchTypeService.getPokemonsOfTheseTypes(
-          this.pokemonsToDisplay
-        );
-        this.thePokemonsSubscription = this.researchTypeService.thePokemons.subscribe(
-          (result) => {
-            this.pokemons = result;
-            this.defineNumberOfColumnsToDisplay();
-          }
-        );
+      (results) => {
+        this.pokemonsToDisplay = results;
       }
     );
+    this.activatedRoute.data.subscribe((data: { results: [] }) => {
+      data.results.forEach((pokemon: any, index) => {
+        this.pokemons.push({
+          name: pokemon.name,
+          image: {
+            dream_world: {
+              front_default: pokemon.sprites.other.dream_world.front_default,
+              front_female: pokemon.sprites.other.dream_world.front_female,
+            },
+            'official-artwork': {
+              front_default:
+                pokemon.sprites.other['official-artwork'].front_default,
+            },
+          },
+          types: pokemon.types.filter(
+            (type) => type.type.name === this.pokemonsToDisplay[index].enType
+          ),
+        });
+      });
+      this.defineNumberOfColumnsToDisplay();
+    });
   }
 
   ngOnDestroy() {
@@ -55,11 +76,9 @@ export class ResultsPageComponent implements OnInit, OnDestroy {
     this.typeService.selectedTypes$.next(
       (this.typeService.selectedTypes = new Set<Type>())
     );
-    this.pokemonsToDisplay = [];
     this.pokemons = [];
     this.researchTypeService.result.next([]);
     this.resultSubscription.unsubscribe();
-    this.thePokemonsSubscription.unsubscribe();
   }
 
   defineNumberOfColumnsToDisplay() {

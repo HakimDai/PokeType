@@ -9,14 +9,13 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./types-to-select.component.scss'],
 })
 export class TypesToSelectComponent implements OnInit, OnDestroy {
-  types: Type[];
+  types = types;
   selectedTypes: Set<Type> = new Set<Type>();
   selectedTypesSubscription: Subscription;
 
   constructor(private typesService: TypesService) {}
 
   ngOnInit(): void {
-    this.types = types;
     this.selectedTypesSubscription = this.subscribeToSelectedType();
   }
 

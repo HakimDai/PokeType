@@ -1,24 +1,17 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { TypeFetchResult } from 'src/app/selectType/models/typeFetchResult';
+import { BehaviorSubject } from 'rxjs';
 import { Type } from 'src/app/shared/models/typeEffectiveness.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TypesService {
-  baseUrl = 'https://pokeapi.co/api/v2';
   selectedTypes$: BehaviorSubject<Set<Type>> = new BehaviorSubject<Set<Type>>(
     new Set<Type>()
   );
   selectedTypes: Set<Type> = new Set<Type>();
 
-  constructor(private http: HttpClient) {}
-
-  fetchTypes(): Observable<TypeFetchResult> {
-    return this.http.get<TypeFetchResult>(`${this.baseUrl}/type`);
-  }
+  constructor() {}
 
   selectTypes(type) {
     if (this.selectedTypes.size >= 2) {

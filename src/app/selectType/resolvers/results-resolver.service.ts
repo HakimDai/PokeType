@@ -8,19 +8,14 @@ import { ResearchTypeService } from 'src/app/selectType/services/research-type.s
 import { mergeMap } from 'rxjs/operators';
 import { TypeDetails } from 'src/app/shared/models/typeDetails.model';
 import { Observable, of } from 'rxjs';
+import { PokemonShortDetail } from '../../shared/models/pokemonShortDetail.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ResultsResolver implements Resolve<any> {
   pokemonsToDisplay;
-  pokemonsListBytypes: {
-    pokemon: {
-      name: string;
-      url: string;
-    };
-    slot: number;
-  }[] = [];
+  pokemonsListBytypes: PokemonShortDetail[][] = [];
 
   constructor(private researchTypeService: ResearchTypeService) {
     this.researchTypeService.result.subscribe((results) => {
@@ -36,7 +31,7 @@ export class ResultsResolver implements Resolve<any> {
           (pokemons): Observable<any> =>
             of(
               pokemons.forEach((pokies: TypeDetails) => {
-                this.pokemonsListBytypes.push(pokies.pokemon);
+                return this.pokemonsListBytypes.push(pokies.pokemon);
               })
             ).pipe(() =>
               of(

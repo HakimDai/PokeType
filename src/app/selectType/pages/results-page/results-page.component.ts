@@ -4,6 +4,7 @@ import { TypesService } from 'src/app/selectType/services/types.service';
 import { ResearchTypeService } from 'src/app/selectType/services/research-type.service';
 import { Type } from 'src/app/shared/models/typeEffectiveness.model';
 import { ActivatedRoute } from '@angular/router';
+import { Pokemon } from '../../models/pokemon.model';
 
 @Component({
   selector: 'app-results-page',
@@ -13,27 +14,7 @@ import { ActivatedRoute } from '@angular/router';
 export class ResultsPageComponent implements OnInit, OnDestroy {
   pokemonsToDisplay;
   numberOfColumnsToDisplay: number;
-  pokemons: {
-    name: string;
-    image: {
-      dream_world: {
-        front_default: string;
-        front_female: string;
-      };
-      ['official-artwork']: {
-        front_default: string;
-      };
-    };
-    types: [
-      {
-        slot: number;
-        type: {
-          name: string;
-          url: string;
-        };
-      }
-    ];
-  }[] = [];
+  pokemons: Pokemon[] = [];
   resultSubscription: Subscription;
 
   constructor(
@@ -52,17 +33,9 @@ export class ResultsPageComponent implements OnInit, OnDestroy {
       data.results.forEach((pokemon: any, index) => {
         this.pokemons.push({
           name: pokemon.name,
-          image: {
-            dream_world: {
-              front_default: pokemon.sprites.other.dream_world.front_default,
-              front_female: pokemon.sprites.other.dream_world.front_female,
-            },
-            'official-artwork': {
-              front_default:
-                pokemon.sprites.other['official-artwork'].front_default,
-            },
-          },
-          types: pokemon.types.filter(
+          types: pokemon.types,
+          sprites: pokemon.sprites.front_default,
+          mainType: pokemon.types.filter(
             (type) => type.type.name === this.pokemonsToDisplay[index].enType
           ),
         });

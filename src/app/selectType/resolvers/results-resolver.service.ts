@@ -1,14 +1,10 @@
-import { Injectable } from '@angular/core';
-import {
-  ActivatedRouteSnapshot,
-  Resolve,
-  RouterStateSnapshot,
-} from '@angular/router';
-import { ResearchTypeService } from 'src/app/selectType/services/research-type.service';
-import { mergeMap } from 'rxjs/operators';
-import { TypeDetails } from 'src/app/shared/models/typeDetails.model';
-import { Observable, of } from 'rxjs';
-import { PokemonShortDetail } from '../../shared/models/pokemonShortDetail.model';
+import {Injectable} from '@angular/core';
+import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot,} from '@angular/router';
+import {ResearchTypeService} from 'src/app/selectType/services/research-type.service';
+import {mergeMap} from 'rxjs/operators';
+import {TypeDetails} from 'src/app/shared/models/typeDetails.model';
+import {Observable, of} from 'rxjs';
+import {PokemonShortDetail} from '../../shared/models/pokemonShortDetail.model';
 
 @Injectable({
   providedIn: 'root',

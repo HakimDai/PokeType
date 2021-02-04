@@ -1,10 +1,13 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Subscription} from 'rxjs';
+import {Observable, of, Subscription} from 'rxjs';
 import {TypesService} from 'src/app/selectType/services/types.service';
 import {ResearchTypeService} from 'src/app/selectType/services/research-type.service';
 import {Type} from 'src/app/shared/models/typeEffectiveness.model';
-import {ActivatedRoute} from '@angular/router';
 import {Pokemon} from '../../models/pokemon.model';
+import {mergeMap} from "rxjs/operators";
+import {TypeDetails} from "../../../shared/models/typeDetails.model";
+import {PokemonShortDetail} from "../../../shared/models/pokemonShortDetail.model";
+import {SpinnerService} from "../../../services/spinner.service";
 
 @Component({
   selector: 'app-results-page',
@@ -13,14 +16,14 @@ import {Pokemon} from '../../models/pokemon.model';
 })
 export class ResultsPageComponent implements OnInit, OnDestroy {
   pokemonsToDisplay;
-  numberOfColumnsToDisplay: number;
   pokemons: Pokemon[] = [];
+  pokemonsListBytypes: PokemonShortDetail[][] = [];
   resultSubscription: Subscription;
 
   constructor(
     private typeService: TypesService,
     private researchTypeService: ResearchTypeService,
-    private activatedRoute: ActivatedRoute
+    private spinnerService: SpinnerService
   ) {}
 
   ngOnInit(): void {
@@ -29,8 +32,8 @@ export class ResultsPageComponent implements OnInit, OnDestroy {
         this.pokemonsToDisplay = results;
       }
     );
-    this.activatedRoute.data.subscribe((data: { results: [] }) => {
-      data.results.forEach((pokemon: any, index) => {
+    this.getPokemonResult().subscribe(results => {
+      results.forEach((pokemon, index) => {
         this.pokemons.push({
           name: pokemon.name,
           types: pokemon.types,
@@ -39,6 +42,7 @@ export class ResultsPageComponent implements OnInit, OnDestroy {
             (type) => type.type.name === this.pokemonsToDisplay[index].enType
           ),
         });
+        this.pokemons.length > 0 ? this.spinnerService.isNavigationPending$.next(false) : '';
       });
     });
   }
@@ -51,6 +55,31 @@ export class ResultsPageComponent implements OnInit, OnDestroy {
     this.pokemons = [];
     this.researchTypeService.result.next([]);
     this.resultSubscription.unsubscribe();
+  }
+
+  getPokemonResult() {
+    return this.researchTypeService
+      .getPokemonsOfTheseTypes(this.pokemonsToDisplay)
+      .pipe(
+        mergeMap(
+          (pokemons): Observable<any> =>
+            of(
+              pokemons.forEach((pokies: TypeDetails) => {
+                return this.pokemonsListBytypes.push(pokies.pokemon);
+              })
+            ).pipe(() =>
+              of(
+                this.researchTypeService.getRandomPokemonsOfTheseTypes(
+                  this.pokemonsListBytypes
+                )
+              ).pipe(
+                mergeMap((pokemons) =>
+                  this.researchTypeService.requestForPokemon(pokemons)
+                )
+              )
+            )
+        )
+      );
   }
 
 }

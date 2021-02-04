@@ -1,10 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { TypesService } from 'src/app/selectType/services/types.service';
-import { ResearchTypeService } from 'src/app/selectType/services/research-type.service';
-import { Type } from 'src/app/shared/models/typeEffectiveness.model';
-import { ActivatedRoute } from '@angular/router';
-import { Pokemon } from '../../models/pokemon.model';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Subscription} from 'rxjs';
+import {TypesService} from 'src/app/selectType/services/types.service';
+import {ResearchTypeService} from 'src/app/selectType/services/research-type.service';
+import {Type} from 'src/app/shared/models/typeEffectiveness.model';
+import {ActivatedRoute} from '@angular/router';
+import {Pokemon} from '../../models/pokemon.model';
 
 @Component({
   selector: 'app-results-page',
@@ -40,7 +40,6 @@ export class ResultsPageComponent implements OnInit, OnDestroy {
           ),
         });
       });
-      this.defineNumberOfColumnsToDisplay();
     });
   }
 
@@ -54,19 +53,4 @@ export class ResultsPageComponent implements OnInit, OnDestroy {
     this.resultSubscription.unsubscribe();
   }
 
-  defineNumberOfColumnsToDisplay() {
-    if (this.pokemons.length === 1 || this.pokemons.length === 3) {
-      this.numberOfColumnsToDisplay = 1;
-      return this.numberOfColumnsToDisplay;
-    } else if (
-      this.pokemons.length === 2 ||
-      (this.pokemons.length >= 4 && this.pokemons.length <= 6)
-    ) {
-      this.numberOfColumnsToDisplay = 2;
-      return (this.numberOfColumnsToDisplay = 2);
-    } else {
-      this.numberOfColumnsToDisplay = 3;
-      return (this.numberOfColumnsToDisplay = 3);
-    }
-  }
 }

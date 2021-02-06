@@ -10,7 +10,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 import {SelectedTypesComponent} from './components/selected-types/selected-types.component';
 import {TypesToSelectComponent} from './components/types-to-select/types-to-select.component';
-import {ButtonComponent} from 'src/app/selectType/components/research-button/button.component';
+import {ButtonComponent} from 'src/app/selectType/components/button/button.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {ResultsPageComponent} from 'src/app/selectType/pages/results-page/results-page.component';
 

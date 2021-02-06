@@ -1,0 +1,8 @@
+<button
+  (click)="click.emit($event)"
+  [disabled]="this.isDisabled"
+  color="warn"
+  mat-raised-button
+>
+  {{ this.message }}
+</button>

@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { SpinnerService } from './services/spinner.service';
-import { Observable } from 'rxjs';
+import {Component, OnInit} from '@angular/core';
+import {SpinnerService} from './services/spinner.service';
 
 @Component({
   selector: 'app-root',
@@ -8,15 +7,16 @@ import { Observable } from 'rxjs';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  isSpinnerVisible$: Observable<boolean> = this.spinnerService
-    .isNavigationPending$;
   displaySpinner = false;
 
-  constructor(private spinnerService: SpinnerService) {}
+  constructor(private spinnerService: SpinnerService) {
+  }
 
   ngOnInit() {
-    this.isSpinnerVisible$.subscribe(
-      (boolean) => (this.displaySpinner = boolean)
+    this.spinnerService.isNavigationPending$.subscribe(
+      (boolean) => {
+        this.displaySpinner = boolean;
+      }
     );
   }
 }

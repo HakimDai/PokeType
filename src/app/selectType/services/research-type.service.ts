@@ -1,15 +1,17 @@
-import {Injectable} from '@angular/core';
-import {Type, types} from 'src/app/shared/models/typeEffectiveness.model';
-import {BehaviorSubject, forkJoin, Observable} from 'rxjs';
-import {RequestPokemonService} from 'src/app/selectType/services/request-pokemon.service';
-import {Router} from '@angular/router';
-import {PokemonShortDetail} from '../../shared/models/pokemonShortDetail.model';
+import { Injectable } from '@angular/core';
+import { Type, types } from 'src/app/shared/models/typeEffectiveness.model';
+import { BehaviorSubject, forkJoin, Observable } from 'rxjs';
+import { RequestPokemonService } from 'src/app/selectType/services/request-pokemon.service';
+import { Router } from '@angular/router';
+import { PokemonShortDetail } from '../../shared/models/pokemonShortDetail.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ResearchTypeService {
-  result: BehaviorSubject<{ type: string; enType: string }[]> = new BehaviorSubject<{ type: string; enType: string }[]>(undefined);
+  result: BehaviorSubject<
+    { type: string; enType: string }[]
+  > = new BehaviorSubject<{ type: string; enType: string }[]>(undefined);
   pokemonsListBytypes: PokemonShortDetail[] = [];
 
   constructor(

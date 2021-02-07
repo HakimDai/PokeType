@@ -1,13 +1,12 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable, of, Subscription } from 'rxjs';
-import { TypesService } from 'src/app/selectType/services/types.service';
-import { ResearchTypeService } from 'src/app/selectType/services/research-type.service';
-import { Type } from 'src/app/shared/models/typeEffectiveness.model';
-import { Pokemon } from '../../models/pokemon.model';
-import { mergeMap } from 'rxjs/operators';
-import { TypeDetails } from '../../../shared/models/typeDetails.model';
-import { PokemonShortDetail } from '../../../shared/models/pokemonShortDetail.model';
-import { LoadingService } from '../../../shared/services/loading.service';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Observable, of, Subscription} from 'rxjs';
+import {TypesService} from 'src/app/selectType/services/types.service';
+import {ResearchTypeService} from 'src/app/selectType/services/research-type.service';
+import {Type} from 'src/app/shared/models/typeEffectiveness.model';
+import {Pokemon} from '../../models/pokemon.model';
+import {mergeMap} from 'rxjs/operators';
+import {TypeDetails} from '../../../shared/models/typeDetails.model';
+import {PokemonShortDetail} from '../../../shared/models/pokemonShortDetail.model';
 
 @Component({
   selector: 'app-results-page',
@@ -23,7 +22,6 @@ export class ResultsPageComponent implements OnInit, OnDestroy {
   constructor(
     private typeService: TypesService,
     private researchTypeService: ResearchTypeService,
-    private loadingService: LoadingService
   ) {}
 
   ngOnInit(): void {
@@ -57,7 +55,6 @@ export class ResultsPageComponent implements OnInit, OnDestroy {
   }
 
   getPokemonResult() {
-    this.loadingService.isLoading.next(true);
     return this.researchTypeService
       .getPokemonsOfTheseTypes(this.pokemonsToDisplay)
       .pipe(

@@ -1,4 +1,7 @@
-<div class="container">
+<div *ngIf="pokemons.length === 0" class="spinner-container">
+  <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+</div>
+<div *ngIf="pokemons.length > 0" class="container">
   <h1>Résultats</h1>
   <mat-card>
     <mat-grid-list [cols]="3" rowHeight="20vh">
@@ -10,12 +13,19 @@
             </span>
           </div>
           <div>{{ pokemon.name }}</div>
-          <img alt="pokemon image" class="pokemon-image" src="{{ pokemon.sprites }}"/>
+          <img
+            alt="pokemon image"
+            class="pokemon-image"
+            src="{{ pokemon.sprites }}"
+          />
         </div>
       </mat-grid-tile>
     </mat-grid-list>
   </mat-card>
   <div class="container-button">
-    <app-button [message]="'Nouvelle Recherche'" routerLink="/home"></app-button>
+    <app-button
+      [message]="'Nouvelle Recherche'"
+      routerLink="/home"
+    ></app-button>
   </div>
 </div>

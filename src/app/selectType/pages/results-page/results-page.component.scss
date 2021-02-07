@@ -39,3 +39,12 @@ mat-card:not([class*='mat-elevation-z']) {
 app-button {
   margin: 0 8px;
 }
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 90vh;
+  z-index: 10001;
+}

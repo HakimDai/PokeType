@@ -1,6 +1,11 @@
-import {Injectable} from '@angular/core';
-import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot,} from '@angular/router';
-import {TypesService} from 'src/app/selectType/services/types.service';
+import { Injectable } from '@angular/core';
+import {
+  ActivatedRouteSnapshot,
+  CanActivate,
+  Router,
+  RouterStateSnapshot,
+} from '@angular/router';
+import { TypesService } from 'src/app/selectType/services/types.service';
 
 @Injectable({
   providedIn: 'root',
@@ -8,8 +13,7 @@ import {TypesService} from 'src/app/selectType/services/types.service';
 export class ResultGuard implements CanActivate {
   selectedTypes: Set<string>;
 
-  constructor(private typesService: TypesService, private router: Router) {
-  }
+  constructor(private typesService: TypesService, private router: Router) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,

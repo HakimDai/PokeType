@@ -1,6 +1,6 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {ButtonComponent} from 'src/app/selectType/components/button/button.component';
+import { ButtonComponent } from 'src/app/selectType/components/button/button.component';
 
 describe('ResearchButtonComponent', () => {
   let component: ButtonComponent;

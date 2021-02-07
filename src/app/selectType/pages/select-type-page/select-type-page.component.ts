@@ -1,7 +1,7 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Type} from "../../../shared/models/typeEffectiveness.model";
-import {TypesService} from "../../services/types.service";
-import {ResearchTypeService} from "../../services/research-type.service";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Type } from '../../../shared/models/typeEffectiveness.model';
+import { TypesService } from '../../services/types.service';
+import { ResearchTypeService } from '../../services/research-type.service';
 
 @Component({
   selector: 'app-home-page',
@@ -15,8 +15,7 @@ export class SelectTypePageComponent implements OnInit, OnDestroy {
   constructor(
     private typesService: TypesService,
     private researchTypeService: ResearchTypeService
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     this.selectedTypesSubscription();

@@ -4,10 +4,9 @@ import {TypesService} from 'src/app/selectType/services/types.service';
 import {ResearchTypeService} from 'src/app/selectType/services/research-type.service';
 import {Type} from 'src/app/shared/models/typeEffectiveness.model';
 import {Pokemon} from '../../models/pokemon.model';
-import {mergeMap} from "rxjs/operators";
-import {TypeDetails} from "../../../shared/models/typeDetails.model";
-import {PokemonShortDetail} from "../../../shared/models/pokemonShortDetail.model";
-import {SpinnerService} from "../../../services/spinner.service";
+import {mergeMap} from 'rxjs/operators';
+import {TypeDetails} from '../../../shared/models/typeDetails.model';
+import {PokemonShortDetail} from '../../../shared/models/pokemonShortDetail.model';
 
 @Component({
   selector: 'app-results-page',
@@ -23,7 +22,6 @@ export class ResultsPageComponent implements OnInit, OnDestroy {
   constructor(
     private typeService: TypesService,
     private researchTypeService: ResearchTypeService,
-    private spinnerService: SpinnerService
   ) {}
 
   ngOnInit(): void {
@@ -32,7 +30,7 @@ export class ResultsPageComponent implements OnInit, OnDestroy {
         this.pokemonsToDisplay = results;
       }
     );
-    this.getPokemonResult().subscribe(results => {
+    this.getPokemonResult().subscribe((results) => {
       results.forEach((pokemon, index) => {
         this.pokemons.push({
           name: pokemon.name,
@@ -42,7 +40,6 @@ export class ResultsPageComponent implements OnInit, OnDestroy {
             (type) => type.type.name === this.pokemonsToDisplay[index].enType
           ),
         });
-        this.pokemons.length > 0 ? this.spinnerService.isNavigationPending$.next(false) : '';
       });
     });
   }
@@ -73,13 +70,12 @@ export class ResultsPageComponent implements OnInit, OnDestroy {
                   this.pokemonsListBytypes
                 )
               ).pipe(
-                mergeMap((pokemons) =>
-                  this.researchTypeService.requestForPokemon(pokemons)
-                )
+                mergeMap((pokemons) => {
+                  return this.researchTypeService.requestForPokemon(pokemons);
+                })
               )
             )
         )
       );
   }
-
 }

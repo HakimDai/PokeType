@@ -1,6 +1,9 @@
 <app-selected-types></app-selected-types>
 <app-types-to-select></app-types-to-select>
 <div class="container">
-  <app-button (click)="researchTypes()" [isDisabled]="this.selectedTypes.size === 0"
-              [message]="researchButtonLabel"></app-button>
+  <app-button
+    (buttonClick)="researchTypes()"
+    [isDisabled]="this.selectedTypes.size === 0"
+    [message]="researchButtonLabel"
+  ></app-button>
 </div>

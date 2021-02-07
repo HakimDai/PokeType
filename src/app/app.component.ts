@@ -1,5 +1,4 @@
-import {Component, OnInit} from '@angular/core';
-import {SpinnerService} from './services/spinner.service';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -9,14 +8,7 @@ import {SpinnerService} from './services/spinner.service';
 export class AppComponent implements OnInit {
   displaySpinner = false;
 
-  constructor(private spinnerService: SpinnerService) {
-  }
+  constructor() {}
 
-  ngOnInit() {
-    this.spinnerService.isNavigationPending$.subscribe(
-      (boolean) => {
-        this.displaySpinner = boolean;
-      }
-    );
-  }
+  ngOnInit() {}
 }
